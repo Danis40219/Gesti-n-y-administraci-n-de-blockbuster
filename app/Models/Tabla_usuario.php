@@ -4,7 +4,7 @@
 
     use CodeIgniter\Model;
 
-    class Tabla_usuarios extends Model{
+    class Tabla_usuario extends Model{
         //Específicamos la entidad
         protected $table ='usuarios';
         //Referenciamos la clave primaria

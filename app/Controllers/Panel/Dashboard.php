@@ -18,7 +18,7 @@ class Dashboard extends BaseController{
         if (!acceso_usuario(TAREA_DASHBOARD, $this->session->rol)) {
             $this->permiso = FALSE;
         }
-         
+        
         $this->session->tarea_actual = TAREA_DASHBOARD;
     } //end __construct
 
@@ -47,7 +47,7 @@ class Dashboard extends BaseController{
              ///dd($data);
 
              //make_message('Esta es una descripcion', 'TITULOU', INFO_ALERT);
-             $table_Usuarios = new \App\Models\Tabla_usuarios;
+             $table_Usuarios = new \App\Models\Tabla_usuario;
             return $data;
         } // end load_data
 

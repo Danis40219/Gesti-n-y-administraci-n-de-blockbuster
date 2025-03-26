@@ -43,23 +43,16 @@ $routes->get('example','Home::hello');
 //$routes->get('inicio_sesion', 'Home::index');
 $routes->get('inicio_sesion', 'Usuario\InicioSesion::index');
 $routes->get('dashboard','Panel\Dashboard::index');
- 
-
-
-
 
 //Usuarios
 $routes->get('usuarios','Panel\Usuarios::index');
 //Usuario Nuevo
 $routes->get('usuario_nuevo','Panel\Usuario_nuevo:index');
-
-
-
-
-
 $routes->get('registrar_usuario','Panel\Usuario_nuevo:registrar');
+
 $routes->get('verificarUsuario', 'Usuario\InicioSesion::validarusuario');
 $routes->post('registrar','Usuario\InicioSesion::validarusuario');
+
 $routes->get('cerrar_sesion', 'Usuario\CerrarSesion::index');
  
 /*

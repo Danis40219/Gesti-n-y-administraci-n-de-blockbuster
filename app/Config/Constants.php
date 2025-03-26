@@ -125,4 +125,4 @@ define('PERMISOS_OPERADOR', array(
 
 //roles
 define("ROL_ADMINISTRADOR", array("clave"=> 745, "rol" => "Administrador"));
-define("ROL_OPERADOR", array("clave"=> 125, "rol" => "Operador")); 
+define("ROL_OPERADOR", array("clave"=> 125, "rol" => "Operador"));

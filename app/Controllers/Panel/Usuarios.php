@@ -20,7 +20,7 @@ class Usuarios extends BaseController{
         if(!acceso_usuario(TAREA_USUARIOS, $this->session->rol)){
             $this->permiso=FALSE;
         }//end if
- 
+
         $this->session->tarea_actual=TAREA_USUARIOS;
     }//end __construct
 

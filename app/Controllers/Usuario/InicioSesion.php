@@ -34,7 +34,7 @@
         }
 
         //Instancia del objeto Tabla_usuarios
-        $tabla_usuarios = new \App\Models\Tabla_usuarios;
+        $tabla_usuarios = new \App\Models\Tabla_usuario;
         $data = $tabla_usuarios->verificarUsuario($email, hash("sha256",$pass));
 
         //dd($data);
