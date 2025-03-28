@@ -40,7 +40,7 @@ class Streaming extends BaseController
         $data['imagen_usuario'] = ($this->session->perfil == NULL)
             ? (($this->session->sexo == MASCULINO) ? 'HOMBRE.jpeg' : 'MUJER.jpeg')
             : $this->session->perfil;
-
+ 
         $breadcrumb = [
             ['href' => route_to("streaming"), 'titulo' => 'Streaming'],
         ];
