@@ -78,51 +78,92 @@ defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+/**
+ * Define a constant
+ * define('CONSTANT_NAME', 1000);
+ * define('CONSTANT_NAME', 'AAA' || 'A');
+ * define('CONSTANT_NAME', array());
+ * 
+ */
 
-defined('RECURSOS_LOGIN_FONTS') || define('RECURSOS_LOGIN_FONTS', 'recursos_usuario/fonts');
-defined('RECURSOS_LOGIN_CSS') || define('RECURSOS_LOGIN_CSS', 'recursos_usuario/css');
-defined('RECURSOS_LOGIN_IMG') || define('RECURSOS_LOGIN_IMG', 'recursos_usuario/images');
-defined('RECURSOS_LOGIN_JS') || define('RECURSOS_LOGIN_JS', 'recursos_usuario/js');
-defined('RECURSOS_LOGIN_VENDOR') || define('RECURSOS_LOGIN_VENDOR', 'recursos_usuario/vendor');
+ // app/Config/Constants.php
+define('RECURSOS_USUARIO_CSS', 'recursos_usuario/css');
+define('RECURSOS_USUARIO_JS', 'recursos_usuario/js');
+define('RECURSOS_USUARIO_IMG', 'recursos_usuario/img');
+define('RECURSOS_USUARIO_FONTS', 'recursos_usuario/fonts');
 
-//Recursos ADMINISTRADOR
+ 
 
-define('RECURSOS_ADMIN_PLUGINS','recursos_panel/plugins');
-define('RECURSOS_ADMIN_JS','recursos_panel/js');
-define('RECURSOS_ADMIN_CSS','recursos_panel/css');
-define('RECURSOS_ADMIN_IMAGEN','recursos_panel/img');
+define('RECURSOS_PANEL_ADMIN_CSS', 'recursos_panel_admin/dist/css');
+define('RECURSOS_PANEL_ADMIN_JS', 'recursos_panel_admin/dist/js');
+define('RECURSOS_PANEL_ADMIN_IMG', 'recursos_panel_admin/dist/img');
+define('RECURSOS_PANEL_ADMIN_PLUGINS', 'recursos_panel_admin/plugins');
+define('RECURSOS_PANEL_IMG_PROFILES_USER', 'images/profile_user/');
 
-//TIPO DE ALERTAS 
 
-define('INFO_ALERT', 'info'); //Azul
-define('WARNING_ALERT', 'warning'); //Anaranjada
-define('ERROR_ALERT', 'error'); //Roja
-define('SUCCESS_ALERT', 'success'); //Verde
+define('MASCULINO', 1);
+define('FEMENINO', 0);
 
-//perfil
-define('RECURSOS_IMG', 'imagenes');
+define ('ESTATUS_HABILITADO', 1);
+define ('ESTATUS_DESHABILITADO', 0);
 
-//SEXO
-define('SEXO_FEMENINO', 0);
-define('SEXO_MASCULINO', 1);
+define('SUCCESS_ALERT', 'success');//verde
+define('WARNING_ALERT', 'warning');//amarillo
+define('INFO_ALERT', 'info');//azul
+define('ERROR_ALERT', 'error');//rojo
 
-//tarea
-define('TAREA_DASHBOARD', "tarea_dashboard");
-define('TAREA_USUARIOS', "tarea_usuarios");
-define('TAREA_PERIODOS', "tarea_periodos");
-define('TAREA_DOCENTES', "tarea_docentes");
+define('TAREA_DASHBOARD', 'tarea_dashboard');
 
-//paginaS
-define('PERMISOS_ADMIN', array(
+define('TAREA_USUARIOS', 'tarea_usuarios');
+define("TAREA_PLANES", "planes");
+define("TAREA_GENEROS", "generos");
+define("TAREA_STREAMING", "streaming");
+define("TAREA_VIDEOS", "videos");
+define("TAREA_PAGOS", "pagos");
+define("TAREA_USUARIOS_PLANES", "usuarios_planes");
+define("TAREA_ALQUILERES", "alquileres");
+
+
+// Permisos para el Administrador
+define('PERMISOS_ADMINISTRADOR', array(
     TAREA_DASHBOARD,
-    TAREA_USUARIOS
+    TAREA_USUARIOS,
+    TAREA_PLANES,
+    TAREA_GENEROS,
+    TAREA_STREAMING,
+    TAREA_VIDEOS,
+    TAREA_PAGOS,
+    TAREA_USUARIOS_PLANES,
+    TAREA_ALQUILERES
 ));
 
-//permisos
 define('PERMISOS_OPERADOR', array(
-    TAREA_DASHBOARD
+    TAREA_DASHBOARD,
+    TAREA_USUARIOS,       
+    TAREA_PAGOS           
 ));
 
-//roles
-define("ROL_ADMINISTRADOR", array("clave"=> 745, "rol" => "Administrador"));
-define("ROL_OPERADOR", array("clave"=> 125, "rol" => "Operador"));
+
+define('PERMISOS_CLIENTE', array(
+    TAREA_DASHBOARD,
+    TAREA_ALQUILERES,     
+    TAREA_PAGOS,         
+    TAREA_VIDEOS          
+));
+
+define('ROL_ADMINISTRADOR', array("clave" => 745 , "rol" => "Administrador"));
+define('ROL_OPERADOR', array("clave" => 125 , "rol" => "Operador"));
+define('ROL_CLIENTE', array("clave" => 58 , "rol" => "Cliente"));
+
+//ROLES
+define("ROLES", array(
+    ROL_ADMINISTRADOR["clave"] => ROL_ADMINISTRADOR["rol"],
+    ROL_OPERADOR["clave"] => ROL_OPERADOR["rol"],
+    ROL_CLIENTE["clave"] => ROL_CLIENTE["rol"],
+));
+
+
+
+define('RECURSOS_PANEL_BSB_JS', 'recursos_panel_bsb\js');
+define('RECURSOS_PANEL_BSB_CSS', 'recursos_panel_bsb\css');
+define('RECURSOS_PANEL_BSB_PLUGINS', 'recursos_panel_bsb\plugins');

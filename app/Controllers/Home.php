@@ -4,25 +4,24 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-    /*
-    *How to declarate a function 
-        ma : modificador de acceso
-        [ma] function nameFunction(arguments){
-            //Stament
-            ruturn ;
-        }
-    */
-    /// Main - index
+    /**
+     * How to declare a function
+     * [ma] function  name(arguments){
+     *      //Stament
+     *      return ;
+     * }
+     */
+    //Main function : index
     public function index()
     {
-        //Calling view 
         return view('welcome_message');
     }
 
-    public function hello(){
-       // echo 'Welcome to new Adventure';
+    public function example(){
+        //Show a String
+        // echo "It's working";
 
-       //calling another method
-       return $this->index();
-    }//end hello
+        //Calling a other method
+        return $this->index();
+    }
 }

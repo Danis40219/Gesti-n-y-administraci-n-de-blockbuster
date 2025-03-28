@@ -1,164 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zxx">
+
 <head>
-	<title>Login V18</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->    
-<link rel="icon" type="image/png" href="<?= base_url(RECURSOS_LOGIN_IMG.'/icons/favicon.ico') ?>"/>
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_VENDOR.'/bootstrap/css/bootstrap.min.css') ?>">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_FONTS.'/font-awesome-4.7.0/css/font-awesome.min.css') ?>">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_FONTS.'/Linearicons-Free-v1.0.0/icon-font.min.css') ?>">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_VENDOR.'/animate/animate.css') ?>">
-<!--===============================================================================================-->    
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_VENDOR.'/css-hamburgers/hamburgers.min.css') ?>">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_VENDOR.'/animsition/css/animsition.min.css') ?>">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_VENDOR.'/select2/select2.min.css') ?>">
-<!--===============================================================================================-->    
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_VENDOR.'/daterangepicker/daterangepicker.css') ?>">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_CSS.'/util.css') ?>">
-<link rel="stylesheet" type="text/css" href="<?= base_url(RECURSOS_LOGIN_CSS.'/main.css') ?>">
-<!--===============================================================================================-->
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><?= esc($nombre_pagina ?? 'Login') ?></title>
 
-<link rel="stylesheet" href="<?= base_url(RECURSOS_ADMIN_PLUGINS.'/toastr/toastr.min.css') ?>">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="<?= RECURSOS_USUARIO_CSS ?>/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= RECURSOS_USUARIO_CSS ?>/font-awesome.min.css">
+    <link rel="stylesheet" href="<?= RECURSOS_USUARIO_CSS ?>/elegant-icons.css">
+    <link rel="stylesheet" href="<?= RECURSOS_USUARIO_CSS ?>/plyr.css">
+    <link rel="stylesheet" href="<?= RECURSOS_USUARIO_CSS ?>/nice-select.css">
+    <link rel="stylesheet" href="<?= RECURSOS_USUARIO_CSS ?>/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?= RECURSOS_USUARIO_CSS ?>/slicknav.min.css">
+    <link rel="stylesheet" href="<?= RECURSOS_USUARIO_CSS ?>/style.css">
+    <link rel="stylesheet" href="<?= base_url(RECURSOS_PANEL_ADMIN_PLUGINS . '/toastr/toastr.min.css') ?>">
 </head>
-<body style="background-color: #666666;">
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				
-				
-				<?= form_open('registrar',['class'=>'login100-form validate-form', 'id'=>'','method'=>'post']) ?>
-					<span class="login100-form-title p-b-43">
-						Login to continue
-					</span>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<?php
-						$attributtes = array (
-							'name' => 'email',
-							'class' => 'input100',
-							'type' => 'email',
-						);
-						echo form_input($attributtes);
-						?>
-						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
-					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<?php
-						$attributtes = array (
-							'name' => 'pass',
-							'class' => 'input100',
-							'type' => 'password',
-						);
-						echo form_password($attributtes);
-						?>
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
-					</div>
 
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-						<?php
-							$attributes = array(
-								'name' => 'remember-me',
-								'id'=>'ckb1',
-								'class' => 'input-checkbox100',
-								'value' => '1',
-								'checked' => 'false'
-							);
-						
-						echo form_checkbox($attributes);
-						?>
-						<label class="label-checkbox100" for="ckb1">
-								Remember me
-						</label>
-							
-						</div>
+<body>
+    <!-- Page Preloader -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 
-						<div>
-							<a href="#" class="txt1">
-								Forgot Password?
-							</a>
-						</div>
-					</div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="<?= base_url('/') ?>">
+                            <img src="<?= RECURSOS_USUARIO_IMG ?>/logo.png" alt="Logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="<?= base_url('/') ?>">Homepage</a></li>
+                            <li><a href="#">Categories</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">Categories</a></li>
+                                    <li><a href="#">Anime Details</a></li>
+                                    <li><a href="#">Anime Watching</a></li>
+                                    <li><a href="#">Blog Details</a></li>
+                                    <li><a href="<?= base_url('registro') ?>">Sign Up</a></li>
+                                    <li><a href="<?= base_url('login') ?>">Login</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Our Blog</a></li>
+                            <li><a href="#">Contacts</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-2">
+                    <div class="header__right">
+                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                        <a href="<?= base_url('login') ?>"><span class="icon_profile"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
 
-			
+    <!-- Breadcrumb -->
+    <section class="normal-breadcrumb set-bg" data-setbg="<?= RECURSOS_USUARIO_IMG ?>/normal-breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="normal__breadcrumb__text">
+                        <h2><?= esc($titulo_pagina ?? 'Login') ?></h2>
+                        <p>Welcome to the official Anime blog.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-					<div class="container-login100-form-btn">
-						<?php
-						$attributes = array(
-							'name'=>'submit',  // Cambié el nombre para mayor claridad
-							'class'=>'login100-form-btn',
-							'type'=>'submit',  // Asegúrate de que sea un botón de tipo submit
-							'value'=>'Login'
-						);
-						echo form_submit($attributes);
-						?>
-					</div>
-										
-					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							or sign up using
-						</span>
-					</div>
+    <!-- Login Section -->
+    <section class="login spad">
+        <div class="container">
+            <div class="row">
+                <!-- Login Form -->
+                <div class="col-lg-6">
+                    <div class="login__form">
+                        <h3>Login</h3>
+                        <?= form_open('iniciar_sesion', ['id' => 'form-login']) ?>
 
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
+                        <div class="input__item">
+                            <?= form_input([
+                                'type' => 'email',
+                                'name' => 'correo_electronico',
+                                'placeholder' => 'Email address',
+                                'class' => 'form-control',
+                                'required' => true
+                            ]) ?>
+                            <span class="icon_mail"></span>
+                        </div>
 
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-						</a>
-					</div>
-				</form>
+                        <div class="input__item">
+                            <?= form_input([
+                                'type' => 'password',
+                                'name' => 'pass',
+                                'placeholder' => 'Password',
+                                'class' => 'form-control',
+                                'required' => true
+                            ]) ?>
+                            <span class="icon_lock"></span>
+                        </div>
 
-				<div class="login100-more" style="background-image: url(<?= base_url(RECURSOS_LOGIN_IMG.'/bg-01.jpg')?>);">
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
+                        <?= form_submit('btn-submit', 'Login Now', ['class' => 'site-btn']) ?>
 
-	
-	
-<!--===============================================================================================-->
-<script src="<?= base_url(RECURSOS_LOGIN_VENDOR.'/jquery/jquery-3.2.1.min.js') ?>"></script>
-<!--===============================================================================================-->
-<script src="<?= base_url(RECURSOS_LOGIN_VENDOR.'/animsition/js/animsition.min.js') ?>"></script>
-<!--===============================================================================================-->
-<script src="<?= base_url(RECURSOS_LOGIN_VENDOR.'/bootstrap/js/popper.js') ?>"></script>
-<script src="<?= base_url(RECURSOS_LOGIN_VENDOR.'/bootstrap/js/bootstrap.min.js') ?>"></script>
-<!--===============================================================================================-->
-<script src="<?= base_url(RECURSOS_LOGIN_VENDOR.'/select2/select2.min.js') ?>"></script>
-<!--===============================================================================================-->
-<script src="<?= base_url(RECURSOS_LOGIN_VENDOR.'/daterangepicker/moment.min.js') ?>"></script>
-<script src="<?= base_url(RECURSOS_LOGIN_VENDOR.'/daterangepicker/daterangepicker.js') ?>"></script>
-<!--===============================================================================================-->
-<script src="<?= base_url(RECURSOS_LOGIN_VENDOR.'/countdowntime/countdowntime.js') ?>"></script>
-<!--===============================================================================================-->
-<script src="<?= base_url(RECURSOS_LOGIN_JS.'/main.js') ?>"></script>
+                        <?= form_close() ?>
 
-<!-- TOASTR -->
-<script src="<?= base_url(RECURSOS_ADMIN_PLUGINS.'/toastr/toastr.min.js') ?>"></script>
-<script src="<?= base_url(RECURSOS_ADMIN_PLUGINS.'/toastr/toastr.min.js') ?>"></script>
-<script>
-  	<?= show_message() ?>
-  	</script>
+                        <a href="#" class="forget_pass">Forgot Your Password?</a>
+                    </div>
+                </div>
 
+                <!-- Register Prompt -->
+                <div class="col-lg-6">
+                    <div class="login__register text-center">
+                        <h3>Don’t Have An Account?</h3>
+                        <a href="<?= base_url('registro') ?>" class="primary-btn">Register Now</a>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Social Links -->
+            <div class="login__social">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="login__social__links">
+                            <span>or</span>
+                            <ul>
+                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Sign in With Facebook</a></li>
+                                <li><a href="#" class="google"><i class="fa fa-google"></i> Sign in With Google</a></li>
+                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Sign in With Twitter</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="page-up">
+            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer__logo">
+                        <a href="<?= base_url('/') ?>"><img src="<?= RECURSOS_USUARIO_IMG ?>/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="footer__nav">
+                        <ul>
+                            <li><a href="<?= base_url('/') ?>">Homepage</a></li>
+                            <li><a href="#">Categories</a></li>
+                            <li><a href="#">Our Blog</a></li>
+                            <li><a href="#">Contacts</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <p>
+                        &copy; <?= date('Y') ?> All rights reserved | Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch"><i class="icon_close"></i></div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="<?= RECURSOS_USUARIO_JS ?>/jquery-3.3.1.min.js"></script>
+    <script src="<?= RECURSOS_USUARIO_JS ?>/bootstrap.min.js"></script>
+    <script src="<?= RECURSOS_USUARIO_JS ?>/player.js"></script>
+    <script src="<?= RECURSOS_USUARIO_JS ?>/jquery.nice-select.min.js"></script>
+    <script src="<?= RECURSOS_USUARIO_JS ?>/mixitup.min.js"></script>
+    <script src="<?= RECURSOS_USUARIO_JS ?>/jquery.slicknav.js"></script>
+    <script src="<?= RECURSOS_USUARIO_JS ?>/owl.carousel.min.js"></script>
+    <script src="<?= RECURSOS_USUARIO_JS ?>/main.js"></script>
+    <script src="<?= base_url(RECURSOS_PANEL_ADMIN_PLUGINS . '/toastr/toastr.min.js') ?>"></script>
+    <script><?= show_message() ?></script>
 </body>
 </html>

@@ -1,38 +1,42 @@
 <?php
-    function make_message($description='', $title='', $type= ''){
-        //Se mandan a traer las alertas en un momento determinado, trayendo un archivo tempral
+    function make_message($type = '', $desc = '', $title = ''){
         session();
-
         $message = array(
-            'desc' => $description,
-            'title' => $title,
-            'alert' => $type
+            'title'=> $title,
+            'description'=> $desc,
+            'type'=> $type,
+
         );
+        session()->set('message', $message);
 
-        session() ->set('message', $message);
 
-    }//end crear un mensaje de manera dinamica
-
+    }//end make_message
 
     function show_message(){
-        $html='';
-
-        $session = session();
-
-        if($session->get('message') == null){
+        $html = '';
+        $message = session()->get('message');
+        if ($message == null) {
             return $html;
         }
-
-        $html="
-
-          toastr.".$session->get('message')['alert'].
-          "('".$session->get('message')['desc']."',
-          '".$session->get('message')['title']."');
-
-        ";
-
+        // $tipo_mensage = '';
+        // switch ($tipo_mensage) {
+        //     case 50:
+        //         $tipo_mensage = 'success';
+        //         break;
+        //     case 100:
+        //         $tipo_mensage = 'error';
+        //         break;
+        //     case 125:
+        //         $tipo_mensage = 'warning';
+        //         break;
+            
+        //     default:
+        //         $tipo_mensage = 'info';
+        //         break;
+        // }
+        // $html .= 'toastr.'.$tipo_mensage.'("'.$message['description'].'", "'.$message['title'].'")';
+        $html .= 'toastr.'.$message['type'].'("'.$message['description'].'", "'.$message['title'].'")';
+        session()->remove('message');
         return $html;
 
-
-    }// end
-?>
+    }

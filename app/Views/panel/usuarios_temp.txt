@@ -1,0 +1,208 @@
+<!-- IMPORTAR LA PLANTILLA -->
+<?= $this->extend('plantillas/panel_base')?>
+
+<!-- RENDER css -->
+<?= $this->section('css')?>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= base_url(RECURSOS_PANEL_ADMIN_PLUGINS).'/datatables-bs4/css/dataTables.bootstrap4.min.css'?>">
+    <link rel="stylesheet" href="<?= base_url(RECURSOS_PANEL_ADMIN_PLUGINS).'/datatables-responsive/css/responsive.bootstrap4.min.css'?>">
+    <!-- Custom CSS -->
+    <style>
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px 8px 0 0 !important;
+            padding: 20px;
+        }
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .btn-agregar {
+            background-color: #38b2ac;
+            border-color: #38b2ac;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-agregar:hover {
+            background-color: #319795;
+            border-color: #319795;
+            transform: translateY(-2px);
+        }
+        .action-btn {
+            border-radius: 4px;
+            margin-right: 5px;
+            transition: all 0.2s;
+        }
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-deshabilitar {
+            background-color: #4a5568;
+            border-color: #4a5568;
+        }
+        .btn-habilitar {
+            background-color: #4299e1;
+            border-color: #4299e1;
+        }
+        .btn-detalles {
+            background-color: #ecc94b;
+            border-color: #ecc94b;
+        }
+        .btn-eliminar {
+            background-color: #f56565;
+            border-color: #f56565;
+        }
+        table.dataTable {
+            border-collapse: collapse !important;
+        }
+        table.dataTable thead th {
+            background-color: #f7fafc;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        table.dataTable tbody tr:hover {
+            background-color: #f7fafc;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #667eea !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 4px;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #764ba2 !important;
+            color: white !important;
+            border: none !important;
+        }
+        .dataTables_wrapper .dataTables_filter input {
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            padding: 5px 10px;
+        }
+    </style>
+<?= $this->endSection()?>
+<!-- RENDER css -->
+
+<!-- RENDER CONTENT -->
+<?= $this->section('content')?>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                  <h3 class="card-title">Lista de usuarios</h3>
+                  <p class="mb-0 text-white-50">Gestión de cuentas de usuario del sistema</p>
+                </div>
+                <a href="<?= route_to('usuario_nuevo') ?>" class="btn btn-primary btn-agregar">
+                  <i class="fas fa-user-plus mr-2"></i>Agregar Nuevo
+                </a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table id="dataTable" class="table table-hover w-100">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Usuario</th>
+                          <th>Rol</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <?php
+                            $html = '';
+                            $index = 0;
+                            if (sizeof($usuarios) > 0) {
+                                foreach ($usuarios as $usuario){
+                                    $html.= '
+                                        <tr>
+                                            <td>'.++$index.'</td>
+                                            <td>'.$usuario->nombre_usuario.' '.$usuario->ap_usuario.' '.$usuario->am_usuario.'</td>
+                                            <td><span class="badge badge-info px-3 py-2">'.ROLES[$usuario->id_rol].'</span></td>
+                                            <td class="d-flex">';
+                                                if ($usuario->estatus_usuario == ESTATUS_HABILITADO) {
+                                                    $html.='<a href="'.route_to("estatus_usuario",$usuario->id_usuario, ESTATUS_DESHABILITADO).'" class="btn btn-deshabilitar btn-sm action-btn" title="Deshabilitar"><i class="fas fa-user-slash mr-1"></i> Deshabilitar</a>';
+                                                
+                                                }
+                                                else {
+                                                    $html.='<a href="'.route_to("estatus_usuario",$usuario->id_usuario, ESTATUS_HABILITADO).'" class="btn btn-habilitar btn-sm action-btn" title="Habilitar"><i class="fas fa-user-check mr-1"></i> Habilitar</a>';
+                                                }
+                                            $html.='
+                                                <a href="'.route_to("detalles_usuario", $usuario->id_usuario).'" class="btn btn-detalles btn-sm action-btn" title="Ver detalles"><i class="fas fa-info-circle mr-1"></i> Detalles</a>
+                                                <a href="'.route_to("eliminar_usuario", $usuario->id_usuario).'" class="btn btn-eliminar btn-sm action-btn" title="Eliminar usuario" onclick="return confirm(\'¿Está seguro de eliminar este usuario?\');"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a>
+                                            </td>
+                                        </tr>
+                                    ';
+                                }
+                            }//end if
+                            echo $html;
+                        ?>
+                      </tbody>
+
+                      <tfoot>
+                        <tr>
+                          <th>#</th>
+                          <th>Usuario</th>
+                          <th>Rol</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+<?= $this->endSection()?>
+<!-- RENDER CONTENT -->
+
+<!-- RENDER js -->
+<?= $this->section('js')?>
+    <!-- DataTables  & Plugins -->
+    <script src="<?= base_url(RECURSOS_PANEL_ADMIN_PLUGINS).'/datatables/jquery.dataTables.min.js'?>"></script>
+    <script src="<?= base_url(RECURSOS_PANEL_ADMIN_PLUGINS).'/datatables-bs4/js/dataTables.bootstrap4.min.js'?>"></script>
+    <script src="<?= base_url(RECURSOS_PANEL_ADMIN_PLUGINS).'/datatables-responsive/js/dataTables.responsive.min.js'?>"></script>
+    <script src="<?= base_url(RECURSOS_PANEL_ADMIN_PLUGINS).'/datatables-responsive/js/responsive.bootstrap4.min.js'?>"></script>
+    <script src="<?= base_url(RECURSOS_PANEL_ADMIN_PLUGINS).'/datatables-buttons/js/dataTables.buttons.min.js'?>"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#dataTable').DataTable({
+                'processing': true,
+                "responsive": true,
+                "scrollX": false,
+                "language":{
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "processing": "<i class='fas fa-spinner fa-spin'></i> Procesando...",
+                    "search": "<i class='fas fa-search'></i> Buscar:",
+                    "zeroRecords": "No se encontraron registros coincidentes",
+                    "paginate":{
+                        "first": "<i class='fas fa-angle-double-left'></i>",
+                        "last": "<i class='fas fa-angle-double-right'></i>",
+                        "next": "<i class='fas fa-angle-right'></i>",
+                        "previous": "<i class='fas fa-angle-left'></i>",
+                    },//end paginate
+                }//end language
+            })//end DataTable
+
+        }//end function
+        );//end ready
+    </script>
+<?= $this->endSection()?>
+<!-- RENDER js -->

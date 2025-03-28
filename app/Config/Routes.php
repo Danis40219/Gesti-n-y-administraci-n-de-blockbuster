@@ -27,34 +27,60 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  * Route Definitions
  * --------------------------------------------------------------------
- *obtiene toda la informacion
- * $routes->get('nameRoute','Controller::function',['as'=>'identifier']);
- *envia toda la informacion del cuerpo requerido
- * $routes->post('nameRoute','Controller::function',['as'=>'identifier']);
+ * // Get all specifics values or value specific
+ * $routes->get('new_route','Controller::method', ['as' => 'identifier']);
  * 
- * se usa la palabra reservada y se identifica el tipo de metodo que se usara recibir o mandar info, nombre de la ruta y eso se manda de 
- * manera interna al controlador y del controlador a la funcion
+ * // Body Request - Send data
+ * $routes->post('','', ['as' => '']);
+ * 
  */
-
+ 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('example','Home::hello');
-//$routes->get('inicio_sesion', 'Home::index');
-$routes->get('inicio_sesion', 'Usuario\InicioSesion::index');
-$routes->get('dashboard','Panel\Dashboard::index');
+$routes->get('/', 'Home::example');
+$routes->get('/inicio', 'Usuario/InicioSesion::index', ['as'=> 'inicio']);
+$routes->get('/dashboard', 'Panel/Dashboard::index', ['as'=> 'dashboard']);
+//$routes->get('/dashboard2', 'Panel/Dashboard::index', ['as'=> 'dashboard2']);
 
-//Usuarios
-$routes->get('usuarios','Panel\Usuarios::index');
-//Usuario Nuevo
-$routes->get('usuario_nuevo','Panel\Usuario_nuevo:index');
-$routes->get('registrar_usuario','Panel\Usuario_nuevo:registrar');
+$routes->post('/iniciar_sesion', 'Usuario/InicioSesion::iniciar_sesion');
+$routes->get('/salir', 'Usuario/Logout::index', ['as'=> 'salir']);
 
-$routes->get('verificarUsuario', 'Usuario\InicioSesion::validarusuario');
-$routes->post('registrar','Usuario\InicioSesion::validarusuario');
+$routes->get('/usuarios', 'Panel/Usuarios::index', ['as'=> 'usuarios']);
+$routes->get('/usuario_nuevo', 'Panel/Usuario_nuevo::index', ['as'=> 'usuario_nuevo']);
+$routes->post('/registrar_usuario', 'Panel/Usuario_nuevo::registrar', ['as'=> 'registrar_usuario']);
 
-$routes->get('cerrar_sesion', 'Usuario\CerrarSesion::index');
- 
+$routes->get('/detalles_usuario/(:num)', 'Panel\Usuario_detalles::index/$1', ['as'=> 'detalles_usuario']);
+$routes->post('editar_usuario/(:num)', 'Panel\Usuario_detalles::actualizar/$1', ['as'=> 'editar_usuario']);
+$routes->get('estatus_usuario/(:segment)/(:segment)', 'Panel\Usuarios::estatus/$1/$2', ['as' => 'estatus_usuario']);
+$routes->get('eliminar_usuario/(:num)', 'Panel\Usuarios::eliminar/$1', ['as'=> 'eliminar_usuario']);
+
+
+
+// Rutas para el módulo de géneros (sin prefijo 'panel')
+$routes->get('generos', 'Panel\Generos::index', ['as' => 'generos']);
+
+// Crear nuevo género
+$routes->get('/generos/nuevo', 'Panel\Genero_nuevo::index', ['as' => 'nuevo_genero']);
+$routes->post('/generos/guardar', 'Panel\Genero_nuevo::registrar', ['as' => 'guardar_genero']);
+
+// Editar género
+$routes->get('generos/editar/(:num)', 'Panel\Genero_detalles::index/$1', ['as' => 'editar_genero']);
+$routes->post('generos/actualizar/(:num)', 'Panel\Genero_detalles::actualizar/$1', ['as' => 'actualizar_genero']);
+$routes->get('generos/estatus/(:segment)/(:segment)', 'Panel\Generos::estatus/$1/$2', ['as' => 'estatus_genero']);
+// Eliminar género
+$routes->get('generos/eliminar/(:num)', 'Panel\Generos::eliminar/$1', ['as' => 'eliminar_genero']);
+
+
+$routes->get('panel/streaming', 'Panel\Streaming::index', ['as' => 'streaming']);
+$routes->get('panel/streaming/nuevo', 'Panel\Streaming::nuevo', ['as' => 'nuevo_streaming']);
+$routes->post('panel/streaming/guardar', 'Panel\Streaming::guardar', ['as' => 'guardar_streaming']);
+$routes->get('panel/streaming/editar/(:num)', 'Panel\Streaming::editar/$1', ['as' => 'editar_streaming']);
+$routes->post('panel/streaming/actualizar/(:num)', 'Panel\Streaming::actualizar/$1', ['as' => 'actualizar_streaming']);
+$routes->get('panel/streaming/eliminar/(:num)', 'Panel\Streaming::eliminar/$1', ['as' => 'eliminar_streaming']);
+$routes->get('panel/streaming/estatus/(:segment)/(:segment)', 'Panel\Streaming::estatus/$1/$2', ['as' => 'estatus_streaming']);
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
